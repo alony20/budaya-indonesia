@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storyboard Budaya Indonesia</title>
+    <!-- Preload untuk performa -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preload" href="styles/style.css" as="style">
+    
+       
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #FAF6EF;
+            color: #2A2A2A;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #B76E00, #F0C987);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .storyboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .panel {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            width: 100%;
+            max-width: 350px;
+        }
+        
+        .panel:hover {
+            transform: translateY(-10px);
+        }
+        
+        .panel-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .panel-content {
+            padding: 20px;
+        }
+        
+        .panel h2 {
+            color: #B76E00;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .panel p {
+            color: #2A2A2A;
+            margin-bottom: 15px;
+        }
+        
+        .read-more {
+            display: inline-block;
+            background-color: #3A2F1B;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .read-more:hover {
+            background-color: #c1121f;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            animation: modalFade 0.5s;
+        }
+        
+        @keyframes modalFade {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .modal h2 {
+            color: #B76E00;
+            margin-bottom: 15px;
+        }
+        
+         footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #2A2A2A;
+            border-top: 2px solid #E0C097;
+            background-color: #F7EED3;
+        }
+        
+        @media (max-width: 768px) {
+            .storyboard {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .panel {
+                max-width: 100%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Storyboard Budaya Indonesia</h1>
+            <p class="subtitle">Menjelajahi Keanekaragaman Budaya Nusantara</p>
+        </header>
+        
+        <div class="storyboard">
+            <!-- Panel 1: Tarian Tradisional -->
+            <div class="panel">
+                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="panel-content">
+                    <h2>Tarian Tradisional</h2>
+                    <p>Indonesia memiliki ratusan tarian tradisional yang mencerminkan kekayaan budaya setiap daerah.</p>
+                    <a href="#" class="read-more" data-modal="modal1">Baca Selengkapnya</a>
+                </div>
+            </div>
+            
+            <!-- Panel 2: Upacara Adat -->
+            <div class="panel">
+                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="panel-content">
+                    <h2>Upacara Adat</h2>
+                    <p>Berbagai upacara adat yang masih dilestarikan hingga kini menjadi bagian penting dari kehidupan masyarakat.</p>
+                    <a href="#" class="read-more" data-modal="modal2">Baca Selengkapnya</a>
+                </div>
+            </div>
+            
+            <!-- Panel 3: Pakaian Tradisional -->
+            <div class="panel">
+                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1594736797933-d0e0315067de?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="panel-content">
+                    <h2>Pakaian Tradisional</h2>
+                    <p>Setiap daerah di Indonesia memiliki pakaian tradisional dengan ciri khas dan makna filosofisnya masing-masing.</p>
+                    <a href="#" class="read-more" data-modal="modal3">Baca Selengkapnya</a>
+                </div>
+            </div>
+            
+            <!-- Panel 4: Kuliner Nusantara -->
+            <div class="panel">
+                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="panel-content">
+                    <h2>Kuliner Nusantara</h2>
+                    <p>Keanekaragaman kuliner Indonesia mencerminkan kekayaan rempah-rempah dan budaya lokal.</p>
+                    <a href="#" class="read-more" data-modal="modal4">Baca Selengkapnya</a>
+                </div>
+            </div>
+            
+            <!-- Panel 5: Rumah Adat -->
+            <div class="panel">
+                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1587295397252-d75ec36b9e95?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="panel-content">
+                    <h2>Rumah Adat</h2>
+                    <p>Arsitektur rumah adat Indonesia menunjukkan kearifan lokal dalam menyesuaikan dengan lingkungan.</p>
+                    <a href="#" class="read-more" data-modal="modal5">Baca Selengkapnya</a>
+                </div>
+            </div>
+            
+            <!-- Panel 6: Seni Musik Tradisional -->
+            <div class="panel">
+                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="panel-content">
+                    <h2>Seni Musik Tradisional</h2>
+                    <p>Alat musik tradisional Indonesia memiliki keunikan dan fungsi dalam berbagai upacara adat.</p>
+                    <a href="#" class="read-more" data-modal="modal6">Baca Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal 1: Tarian Tradisional -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+            <h2>Tarian Tradisional Indonesia</h2>
+            <p>Indonesia memiliki lebih dari 3000 tarian tradisional yang berasal dari berbagai suku bangsa. Setiap tarian memiliki makna, gerakan, dan kostum yang berbeda-beda sesuai dengan budaya daerah asalnya.</p>
+            <p>Beberapa tarian terkenal termasuk Tari Pendet dari Bali, Tari Saman dari Aceh, Tari Kecak dari Bali, Tari Jaipong dari Jawa Barat, dan Tari Piring dari Sumatra Barat.</p>
+            <p>Tarian tradisional biasanya dipentaskan dalam upacara adat, perayaan keagamaan, penyambutan tamu penting, atau festival budaya. Gerakan-gerakan dalam tarian sering kali memiliki makna simbolis yang berkaitan dengan alam, kehidupan, atau nilai-nilai spiritual.</p>
+        </div>
+    </div>
+    
+    <!-- Modal 2: Upacara Adat -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+            <h2>Upacara Adat di Indonesia</h2>
+            <p>Upacara adat merupakan bagian penting dari kehidupan masyarakat Indonesia yang masih dilestarikan hingga saat ini. Upacara ini biasanya terkait dengan siklus hidup manusia, pertanian, atau kepercayaan masyarakat setempat.</p>
+            <p>Contoh upacara adat yang terkenal termasuk Upacara Ngaben di Bali (kremasi), Upacara Kasada di Bromo (persembahan kepada dewa gunung), Upacara Rambu Solo' di Toraja (pemakaman), dan Upacara Tabuik di Sumatra Barat (peringatan wafatnya cucu Nabi Muhammad).</p>
+            <p>Upacara adat tidak hanya menjadi sarana pelestarian budaya, tetapi juga memperkuat ikatan sosial dalam masyarakat dan menjadi daya tarik wisata budaya.</p>
+        </div>
+    </div>
+    
+    <!-- Modal 3: Pakaian Tradisional -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1594736797933-d0e0315067de?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+            <h2>Pakaian Tradisional Indonesia</h2>
+            <p>Pakaian tradisional Indonesia sangat beragam, mencerminkan kekayaan budaya dan adat istiadat setiap daerah. Setiap pakaian memiliki ciri khas, motif, dan makna filosofis yang berbeda.</p>
+            <p>Beberapa pakaian tradisional yang terkenal termasuk Kebaya dari Jawa, Baju Bodo dari Sulawesi Selatan, Ulos dari Sumatra Utara, Tenun Ikat dari Nusa Tenggara Timur, dan Songket dari Sumatra Barat.</p>
+            <p>Pakaian tradisional biasanya dikenakan pada acara-acara khusus seperti pernikahan, upacara adat, atau festival budaya. Motif dan warna pada pakaian sering kali memiliki makna tertentu, seperti status sosial, harapan, atau perlambangan alam.</p>
+        </div>
+    </div>
+    
+    <!-- Modal 4: Kuliner Nusantara -->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+            <h2>Kuliner Nusantara</h2>
+            <p>Kuliner Indonesia dikenal dengan cita rasa yang kaya dan beragam, hasil dari pengaruh berbagai budaya serta kekayaan rempah-rempah lokal. Setiap daerah memiliki hidangan khasnya sendiri.</p>
+            <p>Beberapa makanan terkenal termasuk Rendang dari Sumatra Barat, Sate dari Jawa, Gado-gado dari Jakarta, Pempek dari Palembang, dan Soto dari berbagai daerah dengan variasi berbeda.</p>
+            <p>Kuliner Indonesia tidak hanya lezat tetapi juga mencerminkan kearifan lokal dalam memanfaatkan bahan-bahan alam. Proses pembuatan makanan tradisional sering kali melibatkan teknik dan resep turun-temurun yang dijaga kelestariannya.</p>
+        </div>
+    </div>
+    
+    <!-- Modal 5: Rumah Adat -->
+    <div id="modal5" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1587295397252-d75ec36b9e95?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+            <h2>Rumah Adat Indonesia</h2>
+            <p>Rumah adat Indonesia mencerminkan kearifan lokal dalam beradaptasi dengan lingkungan alam. Setiap suku memiliki bentuk rumah adat yang berbeda, disesuaikan dengan kondisi geografis, iklim, dan kepercayaan masyarakat setempat.</p>
+            <p>Beberapa rumah adat yang terkenal termasuk Rumah Gadang dari Sumatra Barat, Rumah Joglo dari Jawa, Rumah Tongkonan dari Toraja, Rumah Honai dari Papua, dan Rumah Limas dari Sumatra Selatan.</p>
+            <p>Arsitektur rumah adat tidak hanya fungsional tetapi juga penuh dengan simbolisme. Ornamen dan struktur bangunan sering kali memiliki makna filosofis yang berkaitan dengan hubungan manusia dengan alam, Tuhan, dan sesama.</p>
+        </div>
+    </div>
+    
+    <!-- Modal 6: Seni Musik Tradisional -->
+    <div id="modal6" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+            <h2>Seni Musik Tradisional Indonesia</h2>
+            <p>Seni musik tradisional Indonesia sangat beragam, dengan alat musik yang unik dari setiap daerah. Musik tradisional tidak hanya sebagai hiburan tetapi juga memiliki fungsi dalam upacara adat dan ritual keagamaan.</p>
+            <p>Beberapa alat musik tradisional yang terkenal termasuk Gamelan dari Jawa dan Bali, Angklung dari Jawa Barat, Sasando dari Nusa Tenggara Timur, Kolintang dari Sulawesi Utara, dan Tifa dari Papua.</p>
+            <p>Musik tradisional Indonesia sering kali dimainkan secara ensambel, dengan harmoni yang kompleks dan pola ritme yang khas. Beberapa jenis musik tradisional telah diakui UNESCO sebagai Warisan Budaya Takbenda.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Storyboard Budaya Indonesia. Semua hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript untuk mengontrol modal
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ambil semua tombol "Baca Selengkapnya"
+            const readMoreButtons = document.querySelectorAll('.read-more');
+            
+            // Ambil semua modal
+            const modals = document.querySelectorAll('.modal');
+            
+            // Ambil semua tombol close
+            const closeButtons = document.querySelectorAll('.close');
+            
+            // Tambahkan event listener untuk setiap tombol "Baca Selengkapnya"
+            readMoreButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const modalId = this.getAttribute('data-modal');
+                    document.getElementById(modalId).style.display = 'block';
+                });
+            });
+            
+            // Tambahkan event listener untuk setiap tombol close
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.modal').style.display = 'none';
+                });
+            });
+            
+            // Tutup modal ketika mengklik di luar konten modal
+            window.addEventListener('click', function(e) {
+                modals.forEach(modal => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
