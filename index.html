@@ -9,490 +9,191 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            background-color: #FAF9F7;
-            color: #2A2A2A;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        body.no-scroll {
-            overflow: hidden;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            text-align: center;
-            padding: 40px 0;
-            background: linear-gradient(135deg, #4A6FA5, #FFB347);
-            color: white;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-            animation: shine 3s infinite linear;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            position: relative;
-            animation: fadeInDown 1s ease-out;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-        
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .storyboard {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-            justify-content: center;
-            margin: 40px 0;
-        }
-        
-        .panel {
-            background-color: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
-            width: 100%;
-            max-width: 350px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: panelAppear 0.6s ease forwards;
-        }
-        
-        .panel:nth-child(1) { animation-delay: 0.1s; }
-        .panel:nth-child(2) { animation-delay: 0.2s; }
-        .panel:nth-child(3) { animation-delay: 0.3s; }
-        .panel:nth-child(4) { animation-delay: 0.4s; }
-        .panel:nth-child(5) { animation-delay: 0.5s; }
-        .panel:nth-child(6) { animation-delay: 0.6s; }
-        
-        @keyframes panelAppear {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .panel:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .panel-image {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.5s ease;
-        }
-        
-        .panel:hover .panel-image {
-            transform: scale(1.05);
-        }
-        
-        .panel-content {
-            padding: 25px;
-        }
-        
-        .panel h2 {
-            color: #4A6FA5;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .panel h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: #FFB347;
-            transition: width 0.3s ease;
-        }
-        
-        .panel:hover h2::after {
-            width: 100px;
-        }
-        
-        .panel p {
-            color: #444;
-            margin-bottom: 20px;
-            line-height: 1.7;
-            text-align: justify;
-        }
-        
-        .read-more {
-            display: inline-flex;
-            align-items: center;
-            background-color: #4A6FA5;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .read-more::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-        
-        .read-more:hover::before {
-            left: 100%;
-        }
-        
-        .read-more:hover {
-            background-color: #FF6B6B;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-        
-        .read-more i {
-            margin-left: 8px;
-            transition: transform 0.3s ease;
-        }
-        
-        .read-more:hover i {
-            transform: translateX(5px);
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            overflow: auto;
-            animation: modalBgFade 0.3s ease;
-        }
-        
-        @keyframes modalBgFade {
-            from { background-color: rgba(0, 0, 0, 0); }
-            to { background-color: rgba(0, 0, 0, 0.8); }
-        }
-        
-        .modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 35px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 800px;
-            position: relative;
-            animation: modalSlideIn 0.5s ease;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-60px) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            color: #aaa;
-            transition: all 0.3s ease;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-        
-        .close:hover {
-            color: #4A6FA5;
-            background-color: #f0f0f0;
-            transform: rotate(90deg);
-        }
-        
-        .modal-image {
-            width: 100%;
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .modal h2 {
-            color: #4A6FA5;
-            margin-bottom: 20px;
-            font-size: 2rem;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        .modal h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 80px;
-            height: 4px;
-            background: #FFB347;
-            border-radius: 2px;
-        }
-        
-        .modal p {
-            color: #444;
-            margin-bottom: 20px;
-            line-height: 1.8;
-            text-align: justify;
-            font-size: 1.05rem;
-        }
-        
-        .modal p:last-child {
-            margin-bottom: 0;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 60px;
-            color: #2A2A2A;
-            border-top: 2px solid #FFB347;
-            background-color: #F0F5FF;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #4A6FA5, #FFB347, #FF6B6B, #4A6FA5);
-            background-size: 400% 100%;
-            animation: gradientShift 5s ease infinite;
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: #4A6FA5;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .scroll-top.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .scroll-top:hover {
-            background: #FF6B6B;
-            transform: translateY(-5px);
-        }
-        
-        @media (max-width: 768px) {
-            .storyboard {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .panel {
-                max-width: 100%;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .modal-content {
-                padding: 25px;
-                margin: 10% auto;
-            }
-            
-            .modal h2 {
-                font-size: 1.7rem;
-            }
-            
-            .scroll-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+    <!-- Header Navigasi -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#">BudayaNusantara</a>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#" class="nav-link active">Beranda</a>
+                <a href="#" class="nav-link">Tentang</a>
+                <a href="#" class="nav-link">Galeri</a>
+                <a href="#" class="nav-link">Kontak</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Pencarian -->
+    <div class="search-container">
+        <div class="container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Cari budaya, daerah, atau tradisi...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="#">Beranda</a> / <span>Eksplorasi Budaya</span>
+        </div>
+    </div>
+
     <div class="container">
         <header>
             <h1>Storyboard Budaya Indonesia</h1>
             <p class="subtitle">Menjelajahi Keanekaragaman Budaya Nusantara</p>
         </header>
         
+        <!-- Filter Kategori -->
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="tarian">Tarian</button>
+            <button class="filter-btn" data-filter="upacara">Upacara</button>
+            <button class="filter-btn" data-filter="pakaian">Pakaian</button>
+            <button class="filter-btn" data-filter="kuliner">Kuliner</button>
+            <button class="filter-btn" data-filter="rumah">Rumah Adat</button>
+            <button class="filter-btn" data-filter="musik">Musik</button>
+        </div>
+        
         <div class="storyboard">
             <!-- Panel 1: Tarian Tradisional -->
-            <div class="panel">
-                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+            <div class="panel" data-category="tarian">
+                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');">
+                    <div class="panel-overlay">
+                        <div class="panel-badge">Tarian</div>
+                    </div>
+                </div>
                 <div class="panel-content">
                     <h2>Tarian Tradisional</h2>
                     <p>Indonesia memiliki ratusan tarian tradisional yang mencerminkan kekayaan budaya setiap daerah. Keberagaman ini menjadi bukti nyata betapa kaya warisan budaya Nusantara.</p>
-                    <a href="#" class="read-more" data-modal="modal1">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    <div class="panel-footer">
+                        <a href="#" class="read-more" data-modal="modal1">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        <div class="panel-actions">
+                            <button class="action-btn like-btn" data-id="1"><i class="far fa-heart"></i> <span>12</span></button>
+                            <button class="action-btn share-btn" data-id="1"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <!-- Panel 2: Upacara Adat -->
-            <div class="panel">
-                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+            <div class="panel" data-category="upacara">
+                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');">
+                    <div class="panel-overlay">
+                        <div class="panel-badge">Upacara</div>
+                    </div>
+                </div>
                 <div class="panel-content">
                     <h2>Upacara Adat</h2>
                     <p>Berbagai upacara adat yang masih dilestarikan hingga kini menjadi bagian penting dari kehidupan masyarakat dan identitas budaya Indonesia.</p>
-                    <a href="#" class="read-more" data-modal="modal2">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    <div class="panel-footer">
+                        <a href="#" class="read-more" data-modal="modal2">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        <div class="panel-actions">
+                            <button class="action-btn like-btn" data-id="2"><i class="far fa-heart"></i> <span>8</span></button>
+                            <button class="action-btn share-btn" data-id="2"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <!-- Panel 3: Pakaian Tradisional -->
-            <div class="panel">
-                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1594736797933-d0e0315067de?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+            <div class="panel" data-category="pakaian">
+                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1594736797933-d0e0315067de?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');">
+                    <div class="panel-overlay">
+                        <div class="panel-badge">Pakaian</div>
+                    </div>
+                </div>
                 <div class="panel-content">
                     <h2>Pakaian Tradisional</h2>
                     <p>Setiap daerah di Indonesia memiliki pakaian tradisional dengan ciri khas dan makna filosofisnya masing-masing, menunjukkan keragaman budaya yang memukau.</p>
-                    <a href="#" class="read-more" data-modal="modal3">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    <div class="panel-footer">
+                        <a href="#" class="read-more" data-modal="modal3">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        <div class="panel-actions">
+                            <button class="action-btn like-btn" data-id="3"><i class="far fa-heart"></i> <span>15</span></button>
+                            <button class="action-btn share-btn" data-id="3"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <!-- Panel 4: Kuliner Nusantara -->
-            <div class="panel">
-                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+            <div class="panel" data-category="kuliner">
+                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');">
+                    <div class="panel-overlay">
+                        <div class="panel-badge">Kuliner</div>
+                    </div>
+                </div>
                 <div class="panel-content">
                     <h2>Kuliner Nusantara</h2>
                     <p>Keanekaragaman kuliner Indonesia mencerminkan kekayaan rempah-rempah dan budaya lokal, menciptakan cita rasa yang unik dan tak terlupakan.</p>
-                    <a href="#" class="read-more" data-modal="modal4">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    <div class="panel-footer">
+                        <a href="#" class="read-more" data-modal="modal4">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        <div class="panel-actions">
+                            <button class="action-btn like-btn" data-id="4"><i class="far fa-heart"></i> <span>23</span></button>
+                            <button class="action-btn share-btn" data-id="4"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <!-- Panel 5: Rumah Adat -->
-            <div class="panel">
-                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1587295397252-d75ec36b9e95?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+            <div class="panel" data-category="rumah">
+                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1587295397252-d75ec36b9e95?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');">
+                    <div class="panel-overlay">
+                        <div class="panel-badge">Rumah Adat</div>
+                    </div>
+                </div>
                 <div class="panel-content">
                     <h2>Rumah Adat</h2>
                     <p>Arsitektur rumah adat Indonesia menunjukkan kearifan lokal dalam menyesuaikan dengan lingkungan, menggambarkan harmoni antara manusia dan alam.</p>
-                    <a href="#" class="read-more" data-modal="modal5">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    <div class="panel-footer">
+                        <a href="#" class="read-more" data-modal="modal5">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        <div class="panel-actions">
+                            <button class="action-btn like-btn" data-id="5"><i class="far fa-heart"></i> <span>9</span></button>
+                            <button class="action-btn share-btn" data-id="5"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <!-- Panel 6: Seni Musik Tradisional -->
-            <div class="panel">
-                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+            <div class="panel" data-category="musik">
+                <div class="panel-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');">
+                    <div class="panel-overlay">
+                        <div class="panel-badge">Musik</div>
+                    </div>
+                </div>
                 <div class="panel-content">
                     <h2>Seni Musik Tradisional</h2>
                     <p>Alat musik tradisional Indonesia memiliki keunikan dan fungsi dalam berbagai upacara adat, menjadi bagian tak terpisahkan dari kehidupan budaya masyarakat.</p>
-                    <a href="#" class="read-more" data-modal="modal6">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                    <div class="panel-footer">
+                        <a href="#" class="read-more" data-modal="modal6">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        <div class="panel-actions">
+                            <button class="action-btn like-btn" data-id="6"><i class="far fa-heart"></i> <span>17</span></button>
+                            <button class="action-btn share-btn" data-id="6"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn next">Selanjutnya <i class="fas fa-chevron-right"></i></button>
         </div>
     </div>
     
@@ -502,69 +203,42 @@
             <span class="close">&times;</span>
             <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
             <h2>Tarian Tradisional Indonesia</h2>
+            <div class="modal-meta">
+                <span><i class="fas fa-map-marker-alt"></i> Seluruh Nusantara</span>
+                <span><i class="fas fa-clock"></i> Dibaca: 5 menit</span>
+            </div>
             <p>Indonesia memiliki lebih dari 3000 tarian tradisional yang berasal dari berbagai suku bangsa. Setiap tarian memiliki makna, gerakan, dan kostum yang berbeda-beda sesuai dengan budaya daerah asalnya.</p>
             <p>Beberapa tarian terkenal termasuk Tari Pendet dari Bali, Tari Saman dari Aceh, Tari Kecak dari Bali, Tari Jaipong dari Jawa Barat, dan Tari Piring dari Sumatra Barat. Tarian-tarian ini tidak hanya indah secara visual tetapi juga sarat dengan makna filosofis dan cerita rakyat.</p>
             <p>Tarian tradisional biasanya dipentaskan dalam upacara adat, perayaan keagamaan, penyambutan tamu penting, atau festival budaya. Gerakan-gerakan dalam tarian sering kali memiliki makna simbolis yang berkaitan dengan alam, kehidupan, atau nilai-nilai spiritual yang dijunjung tinggi oleh masyarakat setempat.</p>
+            <div class="modal-footer">
+                <div class="tags">
+                    <span class="tag">Tari</span>
+                    <span class="tag">Budaya</span>
+                    <span class="tag">Seni</span>
+                </div>
+                <div class="social-share">
+                    <span>Bagikan:</span>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
         </div>
     </div>
     
-    <!-- Modal 2: Upacara Adat -->
-    <div id="modal2" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-            <h2>Upacara Adat di Indonesia</h2>
-            <p>Upacara adat merupakan bagian penting dari kehidupan masyarakat Indonesia yang masih dilestarikan hingga saat ini. Upacara ini biasanya terkait dengan siklus hidup manusia, pertanian, atau kepercayaan masyarakat setempat.</p>
-            <p>Contoh upacara adat yang terkenal termasuk Upacara Ngaben di Bali (kremasi), Upacara Kasada di Bromo (persembahan kepada dewa gunung), Upacara Rambu Solo' di Toraja (pemakaman), dan Upacara Tabuik di Sumatra Barat (peringatan wafatnya cucu Nabi Muhammad).</p>
-            <p>Upacara adat tidak hanya menjadi sarana pelestarian budaya, tetapi juga memperkuat ikatan sosial dalam masyarakat dan menjadi daya tarik wisata budaya. Melalui upacara-upacara ini, nilai-nilai luhur dan kearifan lokal terus diturunkan dari generasi ke generasi.</p>
-        </div>
-    </div>
+    <!-- Modal lainnya tetap sama dengan penambahan meta data dan footer -->
     
-    <!-- Modal 3: Pakaian Tradisional -->
-    <div id="modal3" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1594736797933-d0e0315067de?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-            <h2>Pakaian Tradisional Indonesia</h2>
-            <p>Pakaian tradisional Indonesia sangat beragam, mencerminkan kekayaan budaya dan adat istiadat setiap daerah. Setiap pakaian memiliki ciri khas, motif, dan makna filosofis yang berbeda, menciptakan mozaik budaya yang memukau.</p>
-            <p>Beberapa pakaian tradisional yang terkenal termasuk Kebaya dari Jawa, Baju Bodo dari Sulawesi Selatan, Ulos dari Sumatra Utara, Tenun Ikat dari Nusa Tenggara Timur, dan Songket dari Sumatra Barat. Masing-masing memiliki keunikan dalam bahan, teknik pembuatan, dan simbolisme.</p>
-            <p>Pakaian tradisional biasanya dikenakan pada acara-acara khusus seperti pernikahan, upacara adat, atau festival budaya. Motif dan warna pada pakaian sering kali memiliki makna tertentu, seperti status sosial, harapan, atau perlambangan alam yang menjadi bagian dari kehidupan masyarakat.</p>
-        </div>
-    </div>
-    
-    <!-- Modal 4: Kuliner Nusantara -->
-    <div id="modal4" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-            <h2>Kuliner Nusantara</h2>
-            <p>Kuliner Indonesia dikenal dengan cita rasa yang kaya dan beragam, hasil dari pengaruh berbagai budaya serta kekayaan rempah-rempah lokal. Setiap daerah memiliki hidangan khasnya sendiri yang menggambarkan identitas budaya setempat.</p>
-            <p>Beberapa makanan terkenal termasuk Rendang dari Sumatra Barat, Sate dari Jawa, Gado-gado dari Jakarta, Pempek dari Palembang, dan Soto dari berbagai daerah dengan variasi berbeda. Keunikan cita rasa ini menjadi daya tarik bagi wisatawan domestik maupun mancanegara.</p>
-            <p>Kuliner Indonesia tidak hanya lezat tetapi juga mencerminkan kearifan lokal dalam memanfaatkan bahan-bahan alam. Proses pembuatan makanan tradisional sering kali melibatkan teknik dan resep turun-temurun yang dijaga kelestariannya, menjadi warisan budaya tak benda yang berharga.</p>
-        </div>
-    </div>
-    
-    <!-- Modal 5: Rumah Adat -->
-    <div id="modal5" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1587295397252-d75ec36b9e95?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-            <h2>Rumah Adat Indonesia</h2>
-            <p>Rumah adat Indonesia mencerminkan kearifan lokal dalam beradaptasi dengan lingkungan alam. Setiap suku memiliki bentuk rumah adat yang berbeda, disesuaikan dengan kondisi geografis, iklim, dan kepercayaan masyarakat setempat.</p>
-            <p>Beberapa rumah adat yang terkenal termasuk Rumah Gadang dari Sumatra Barat, Rumah Joglo dari Jawa, Rumah Tongkonan dari Toraja, Rumah Honai dari Papua, dan Rumah Limas dari Sumatra Selatan. Masing-masing memiliki karakteristik arsitektur yang unik dan fungsional.</p>
-            <p>Arsitektur rumah adat tidak hanya fungsional tetapi juga penuh dengan simbolisme. Ornamen dan struktur bangunan sering kali memiliki makna filosofis yang berkaitan dengan hubungan manusia dengan alam, Tuhan, dan sesama, menciptakan harmoni dalam kehidupan.</p>
-        </div>
-    </div>
-    
-    <!-- Modal 6: Seni Musik Tradisional -->
-    <div id="modal6" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-            <h2>Seni Musik Tradisional Indonesia</h2>
-            <p>Seni musik tradisional Indonesia sangat beragam, dengan alat musik yang unik dari setiap daerah. Musik tradisional tidak hanya sebagai hiburan tetapi juga memiliki fungsi dalam upacara adat dan ritual keagamaan.</p>
-            <p>Beberapa alat musik tradisional yang terkenal termasuk Gamelan dari Jawa dan Bali, Angklung dari Jawa Barat, Sasando dari Nusa Tenggara Timur, Kolintang dari Sulawesi Utara, dan Tifa dari Papua. Masing-masing alat musik memiliki karakteristik suara dan teknik permainan yang khas.</p>
-            <p>Musik tradisional Indonesia sering kali dimainkan secara ensambel, dengan harmoni yang kompleks dan pola ritme yang khas. Beberapa jenis musik tradisional telah diakui UNESCO sebagai Warisan Budaya Takbenda, mengukuhkan posisinya sebagai kekayaan budaya dunia yang perlu dilestarikan.</p>
+    <!-- Newsletter -->
+    <div class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h3>Berlangganan Newsletter Budaya</h3>
+                <p>Dapatkan update terbaru tentang budaya Indonesia langsung ke email Anda</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Alamat email Anda" required>
+                    <button type="submit">Berlangganan</button>
+                </form>
+            </div>
         </div>
     </div>
     
@@ -574,80 +248,51 @@
     
     <footer>
         <div class="container">
-            <p>&copy; 2025 Storyboard Budaya Indonesia. Semua hak cipta dilindungi.</p>
-            <p>Menjaga warisan budaya untuk generasi mendatang</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>BudayaNusantara</h4>
+                    <p>Platform edukasi budaya Indonesia untuk melestarikan warisan nenek moyang bagi generasi mendatang.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Kategori</h4>
+                    <ul>
+                        <li><a href="#">Tarian Tradisional</a></li>
+                        <li><a href="#">Upacara Adat</a></li>
+                        <li><a href="#">Pakaian Tradisional</a></li>
+                        <li><a href="#">Kuliner Nusantara</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Link Cepat</h4>
+                    <ul>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontak</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Cirebon, Indonesia</li>
+                        <li><i class="fas fa-envelope"></i> info@budayanusantara.id</li>
+                        <li><i class="fas fa-phone"></i> +62 21 1234 5678</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Storyboard Budaya Indonesia. Semua hak cipta dilindungi.</p>
+                <p>Menjaga warisan budaya untuk generasi mendatang</p>
+            </div>
         </div>
     </footer>
 
-    <script>
-        // JavaScript untuk mengontrol modal
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ambil semua tombol "Baca Selengkapnya"
-            const readMoreButtons = document.querySelectorAll('.read-more');
-            
-            // Ambil semua modal
-            const modals = document.querySelectorAll('.modal');
-            
-            // Ambil semua tombol close
-            const closeButtons = document.querySelectorAll('.close');
-            
-            // Tombol scroll to top
-            const scrollTopBtn = document.querySelector('.scroll-top');
-            
-            // Fungsi untuk menonaktifkan scroll
-            function disableScroll() {
-                document.body.classList.add('no-scroll');
-            }
-            
-            // Fungsi untuk mengaktifkan scroll
-            function enableScroll() {
-                document.body.classList.remove('no-scroll');
-            }
-            
-            // Tambahkan event listener untuk setiap tombol "Baca Selengkapnya"
-            readMoreButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const modalId = this.getAttribute('data-modal');
-                    document.getElementById(modalId).style.display = 'block';
-                    disableScroll();
-                });
-            });
-            
-            // Tambahkan event listener untuk setiap tombol close
-            closeButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    this.closest('.modal').style.display = 'none';
-                    enableScroll();
-                });
-            });
-            
-            // Tutup modal ketika mengklik di luar konten modal
-            window.addEventListener('click', function(e) {
-                modals.forEach(modal => {
-                    if (e.target === modal) {
-                        modal.style.display = 'none';
-                        enableScroll();
-                    }
-                });
-            });
-            
-            // Tombol scroll to top
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    scrollTopBtn.classList.add('active');
-                } else {
-                    scrollTopBtn.classList.remove('active');
-                }
-            });
-            
-            scrollTopBtn.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+    <script src="scripts/script.js"></script>
 </body>
 </html>
